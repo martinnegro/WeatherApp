@@ -9,6 +9,7 @@ const { API_KEY } = process.env
 const server = express();
 server.name = 'API'
 
+server.use(morgan('dev'));
 server.use(cors());
 
 server.get('/',(req, res) => {
@@ -21,10 +22,23 @@ server.get('/api', (req, res, next) => {
         axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=es&units=metric`)
             .then(response => {
                 res.json(response.data)
-            })
+            }).catch(err => {
+                err.status  = 500;
+                err.message = 'Hubo un problema con la API de OWM';
+                next(err)
+            });
     } else {
-        res.status(400).json({message: 'No city name was provided.'})
+        const err = new Error('No fue provisto un nombre de ciudad.')
+        err.status = 400;
+        next(err);
     }
+});
+
+server.use((err, _req, res, next) => {
+    const status  = err.status  || 500;
+    const message = err.message || err;
+    res.status(status).json({message});
+    next();
 });
 
 server.listen(process.env.PORT || 5000, () => {
