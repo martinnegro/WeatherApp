@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.contenedor {
+    border: 2px  black;
+    border-radius: 5px;
+    
+    min-width: 240px;
+    max-width: 300px;
+    max-height: 150px;
+    
+    margin: 10px;
+    padding: 10px;
+    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 5px rgb(255, 255, 255,0.2);
+
+    
+    transition: ease-out 500ms;
+}
+
+.contenedor:hover {
+    transform: scale(1.05);
+}
+
+
+@media screen and (max-width: 500px) {
+    .contenedor {
+      max-width: 100%;
+    }
+  }
+  
+
+.closeBtn {
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    margin: 5px;
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    
+    justify-self: end;
+    vertical-align: text-top;
+    float: left;
+    font-size: small;
+    opacity: 0.7;
+    background-color: hsl(7, 85%, 40%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    
+}
+
+.closeBtn:hover {
+    background-color: hsl(7, 50%, 50%)
+}
+
+.closeBtn:active {
+    transform: scale(0.9);
+}
+
+.titulo {
+    grid-row: 1 / 2;
+    grid-column: 1 / 4;
+    color: #ffffff;
+    margin: 0;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 85%;
+    
+    border-bottom: 1px solid rgba(34, 34, 34, 0.5);
+    box-shadow: 0 5px 6px -6px  #0e0101;
+
+    font-family: 'Montserrat';
+}
+h4 {
+    margin-bottom: 0;
+}
+
+
+.min {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+}   
+
+.max {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+.temp {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    
+    
+    font-family: 'Montserrat';
+    color: white;
+
+    background-color: rgb(255, 255, 255,0.2);
+    border-radius: 5px;
+    margin: 10px 5px 10px 5px;
+}
+
+.temp:hover {
+    transform: scale(1.1);
+}
+
+.icono {
+    grid-row: 2 / 3;
+    grid-column: 3 / 4;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    border-radius: 5px;
+    
+
+    /* background: #0edea2;
+    background: linear-gradient(180deg, rgba(14,222,162,1) 0%, rgba(218,244,137,1) 58%, rgba(218,244,137,1) 94%);  */
+}
+
+.icono:hover {
+    transform: scale(1.1);
+}
+
+p {
+    margin: 0;
+}
