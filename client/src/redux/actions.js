@@ -1,6 +1,7 @@
 import axios from 'axios';
 export const FETCH_CITY  = 'FETCH_CITY';
 export const IS_FETCHING = 'IS_FETCHING';
+export const CLOSE_CITY  = 'CLOSE_CITY';
 
 export function fetchCity(city) {
     return function (dispatch) {
@@ -34,5 +35,12 @@ export function fetchCity(city) {
 export function isFetching() {
     return {
         type: IS_FETCHING
+    }
+}
+
+export function closeCity(payload) {
+    return {
+        type: CLOSE_CITY,
+        payload
     }
 }

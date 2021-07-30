@@ -2,7 +2,7 @@ import React from 'react';
 import style from './App.module.css';
 import { Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCity } from '../redux/actions';
+import { fetchCity, closeCity } from '../redux/actions';
 
 import Cards from '../components/Cards.jsx';
 import Nav from '../components/Nav'
@@ -16,9 +16,9 @@ function App() {
   function onSearch(city) {
     dispatch(fetchCity(city));
   }
-  // function onClose(cityId) {
-  // setCities(oldC => oldC.filter(c => c.id !== cityId))
-  // }
+  function onClose(cityId) {
+    dispatch(closeCity(cityId))
+  }
 
   function onFilter(cityId) {
     let city = cities.filter(c => c.id === parseInt(cityId));
@@ -36,7 +36,7 @@ function App() {
         <Route exact path='/'
           render={() => <Cards 
             cities={cities}
-            // onClose={onClose}  
+            onClose={onClose}  
           />}
         />
         <Route path='/about' component={About}/> 
