@@ -8,7 +8,9 @@ export default function Cards({cities,onClose}) {
   return (<div id={style.contenedor}>
             {
               cities.map(city => 
-                city.isFetching ? <Card name='Cargando...'/> :
+                city.isFetching ? <Card name='Cargando...' id={city.id} onClose={() => onClose(city.id)} key={city.id}/> :
+                city.isError    ? <Card name={city.message} id={city.id} onClose={setTimeout(()=>onClose(city.id),3000)}key={city.id}/> :
+                city.isPresent  ? <Card name={city.message} id={city.id} onClose={setTimeout(()=>onClose(city.id),3000)}key={city.id}/> :
                 <Card 
                   name={city.name} 
                   min={city.min} 

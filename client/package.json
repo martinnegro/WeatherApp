@@ -17,7 +17,8 @@
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "thunk": "^0.0.1"
+    "thunk": "^0.0.1",
+    "uuid": "^8.3.2"
   },
   "proxy": "http://localhost:5000",
   "scripts": {

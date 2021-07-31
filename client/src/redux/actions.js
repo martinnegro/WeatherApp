@@ -1,11 +1,14 @@
 import axios from 'axios';
+const { v4: uuidv4 } = require('uuid');
 export const FETCH_CITY  = 'FETCH_CITY';
 export const IS_FETCHING = 'IS_FETCHING';
 export const CLOSE_CITY  = 'CLOSE_CITY';
+export const FETCH_ERROR = 'FETCH_ERROR';
 
 export function fetchCity(city) {
     return function (dispatch) {
-        dispatch(isFetching());
+        const id = uuidv4();
+        dispatch(isFetching(id));
         return axios.get(`https://server-weatherapp.herokuapp.com/api?city=${city}`)
             .then(response => {
                 if(response.data !== undefined){
@@ -25,16 +28,17 @@ export function fetchCity(city) {
                     }
                     dispatch({
                         type: FETCH_CITY,
-                        payload: city
+                        payload: {city, id}
                     })
                 }
-            });
+            }).catch(err => dispatch({type: FETCH_ERROR, payload: {err, id}}));
     }
 }
 
-export function isFetching() {
+export function isFetching(payload) {
     return {
-        type: IS_FETCHING
+        type: IS_FETCHING,
+        payload
     }
 }
 

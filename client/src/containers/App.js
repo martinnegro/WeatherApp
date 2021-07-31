@@ -20,15 +20,6 @@ function App() {
     dispatch(closeCity(cityId))
   }
 
-  function onFilter(cityId) {
-    let city = cities.filter(c => c.id === parseInt(cityId));
-    if (city.length > 0) {
-      return city[0];
-    } else {
-      return null;
-    }
-  }
-
   return (
     <div className={style.App}>
       <Route path='/' render={() => <Nav onSearch={onSearch}/>}/>
@@ -42,7 +33,7 @@ function App() {
         <Route path='/about' component={About}/> 
         <Route 
           exact path='/city/:cityId' 
-          render={({match}) => <City city={onFilter(match.params.cityId)}/>} />   
+          render={({match}) => <City city={match.params.cityId}/>} />   
       </div>
     </div>
   );
