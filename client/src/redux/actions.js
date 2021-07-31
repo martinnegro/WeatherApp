@@ -1,5 +1,8 @@
 import axios from 'axios';
 const { v4: uuidv4 } = require('uuid');
+
+const { REACT_APP_URL_BACKEND } = process.env; 
+console.log(process.env)
 export const FETCH_CITY  = 'FETCH_CITY';
 export const IS_FETCHING = 'IS_FETCHING';
 export const CLOSE_CITY  = 'CLOSE_CITY';
@@ -9,7 +12,7 @@ export function fetchCity(city) {
     return function (dispatch) {
         const id = uuidv4();
         dispatch(isFetching(id));
-        return axios.get(`https://server-weatherapp.herokuapp.com/api?city=${city}`)
+        return axios.get(`${REACT_APP_URL_BACKEND}/api?city=${city}`)
             .then(response => {
                 if(response.data !== undefined){
                     const data = response.data
