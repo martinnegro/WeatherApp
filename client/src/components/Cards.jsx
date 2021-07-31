@@ -4,9 +4,10 @@ import Card from './Card.jsx';
 import style from './Cards.module.css'
 
 export default function Cards({cities,onClose}) {
-  if (cities.length < 1) return 'Sin ciudades.'
+  
   return (<div id={style.contenedor}>
             {
+              !cities || cities.length < 1 ? <Card name='No hay ciudades cargadas'/> :
               cities.map(city => 
                 city.isFetching ? <Card name='Cargando...' id={city.id} onClose={() => onClose(city.id)} key={city.id}/> :
                 city.isError    ? <Card name={city.message} id={city.id} onClose={setTimeout(()=>onClose(city.id),3000)}key={city.id}/> :

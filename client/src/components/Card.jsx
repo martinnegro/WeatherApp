@@ -8,10 +8,10 @@ export default function Card({onClose,name,min,max,weatherImg,id}) {
   return (
           <div className={style.contenedor}>
             <button onClick={onClose} className={style.closeBtn}></button>
-            <Link to={`city/${id}`}
-              className={style.titulo}>
-              <h4>{name}</h4>
-            </Link>
+            
+               
+              <h4 className={style.sinCiudad}>  {name}</h4>
+            
             {
               (min && max) ?
             <>
