@@ -8,13 +8,13 @@ export default function Card({onClose,name,min,max,weatherImg,id}) {
   return (
           <div className={style.contenedor}>
             <button onClick={onClose} className={style.closeBtn}></button>
-            
-               
-              <h4 className={style.sinCiudad}>  {name}</h4>
-            
             {
-              (min && max) ?
+              !(min && max) ?  <h4 className={style.sinCiudad}>{name}</h4> :
             <>
+            <Link to={`city/${id}`}
+              className={style.titulo} >
+              <h4>{name}</h4>
+            </Link>
               <div className={`${style.min} ${style.temp}`}>
                 <p>Min</p>
                 <p>{min}°</p>
@@ -24,8 +24,7 @@ export default function Card({onClose,name,min,max,weatherImg,id}) {
                 <p>{max}°</p>
               </div>
               <img src={urlImg} alt='' className={style.icono}/>
-            </> :
-              <></>
+            </>            
             }
           </div>
 )};
