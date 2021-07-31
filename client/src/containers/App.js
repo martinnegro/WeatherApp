@@ -33,7 +33,7 @@ function App() {
         <Route path='/about' component={About}/> 
         <Route 
           exact path='/city/:cityId' 
-          render={({match}) => <City city={match.params.cityId}/>} />   
+          render={({match}) => <City cityId={match.params.cityId}/>} />   
       </div>
     </div>
   );

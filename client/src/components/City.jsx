@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import style from './City.module.css'
 
-
-
-
 export default function City({cityId}) {
     const cities = useSelector(state => state)
     const [ city, setCity ]  = useState()
 
     useEffect(() => {
-        const aux = cities.filter(c => c.id === parseInt(cityId));
+        const aux = cities.find(c => parseInt(c.id) === parseInt(cityId));
+        console.log(aux)
         setCity(aux)
     }, [cities, cityId])
 
@@ -19,6 +17,7 @@ export default function City({cityId}) {
             <div className={style.container}>
                 {   
                     !city ? <div>CARGANDO</div> :
+                    city.length === 0 ? <div>NO HAY INFORMACIÓN!</div> :
                     <>
                         <h2 className={style.titulo}>{city.name}</h2>
                         <div className={style.info}>
