@@ -1,0 +1,4 @@
+GET http://localhost:5000/get_layer/a/6/24/45.png
+###
+
+GET https://a.tile.openweathermap.org/map/clouds_new/6/24/45.png?appid=e49bd2b8767b30828d0cbb6f2869031a

@@ -2,7 +2,8 @@ const express = require('express');
 const path    = require('path');
 const morgan  = require('morgan');
 const axios   = require('axios');
-const cors    = require('cors')
+const cors    = require('cors');
+const fetch   = require('node-fetch');
 require('dotenv').config();
 const { API_KEY } = process.env
 
@@ -33,6 +34,27 @@ server.get('/api', (req, res, next) => {
         next(err);
     }
 });
+
+server.get('/get_layer/:s/:z/:x/:y.png', async (req, res, next) => {
+    const { s, z, x, y } = req.params;
+    // const response = await axios.get(`https://${s}.tile.openweathermap.org/map/clouds_new/${z}/${x}/${y}.png?appid=${API_KEY}`);
+    // res.writeHead(200, {
+    //     'Content-Type': 'image/png',
+    //     'Content-Length': response.data.length,
+    //     'Connection': 'keep-alive',
+    //     'Filename': `${z}/${x}/${y}.png`
+    //   })
+    // res.pipe(response);
+
+    //https://stackoverflow.com/questions/18432779/piping-remote-file-in-expressjs
+    fetch(`https://${s}.tile.openweathermap.org/map/clouds_new/${z}/${x}/${y}.png?appid=${API_KEY}`)
+        .then(actual => {
+            actual.headers.forEach((v, n) => res.setHeader(n, v));
+            actual.body.pipe(res);
+        });
+
+});
+
 
 server.use((err, _req, res, next) => {
     const status  = err.status  || 500;

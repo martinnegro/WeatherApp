@@ -2,7 +2,7 @@ import axios from 'axios';
 const { v4: uuidv4 } = require('uuid');
 
 const { REACT_APP_URL_BACKEND } = process.env; 
-console.log(process.env)
+
 export const FETCH_CITY  = 'FETCH_CITY';
 export const IS_FETCHING = 'IS_FETCHING';
 export const CLOSE_CITY  = 'CLOSE_CITY';
