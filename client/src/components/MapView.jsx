@@ -3,6 +3,7 @@ import axios from 'axios';
 import { MapContainer, TileLayer, } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'
 import './MapView.module.css';
+const { REACT_APP_URL_BACKEND } = process.env;
 
 function MapView({lat, lng}) {
 
@@ -19,7 +20,7 @@ function MapView({lat, lng}) {
             /> */}
             <TileLayer 
                 attribution='&copy; <a href="http://openweathermap.com">OpenWeatherMap</a>'
-                url='http://localhost:5000/get_layer/{s}/{z}/{x}/{y}.png'
+                url={`${REACT_APP_URL_BACKEND}/get_layer/{s}/{z}/{x}/{y}.png`}
             />
             </MapContainer>
     )
