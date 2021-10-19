@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import './City.module.css'
 import style from './City.module.css'
-import MapView from "./MapView";
+import MapView from "./components/MapView";
 
 export default function City({cityId}) {
     const cities = useSelector(state => state)

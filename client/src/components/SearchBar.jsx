@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchCity } from '../redux/actions/cities';
 import style from './SearchBar.module.css'
 
 export default function SearchBar({onSearch}) {
+  const dispatch = useDispatch();
   const [city, setCity] = useState('');
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    dispatch(fetchCity(city));
+    setCity('');
+  };
 
   return (
     <form 
       className={style.buscar}
-      onSubmit={(e) =>{
-        e.preventDefault();
-        onSearch(city);
-        setCity('')
-      }}
+      onSubmit={handleOnSubmit}
     >
         <input className={style.inpForm} type='text' placeholder='Ingrese ciudad'
           value={city}

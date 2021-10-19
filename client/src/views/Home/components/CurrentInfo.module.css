@@ -1,0 +1,9 @@
+.container {
+    
+}
+
+.dailyContainer {
+    display: flex;
+    overflow: scroll;
+    scroll-y: hidden;
+}

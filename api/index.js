@@ -35,6 +35,32 @@ server.get('/api', (req, res, next) => {
     }
 });
 
+server.get('/api/currentlocation', async (req, res, next) => {
+    const { lat, lon } = req.query;
+    if ( lat && lon ) {
+        try {    
+            const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/onecall`,{
+                params: {
+                    lat,
+                    lon,
+                    exclude: 'minutely,hourly',
+                    appid: API_KEY,
+                    units: 'metric',
+                    lang: 'es'
+                }
+            });
+            res.json(data)
+        } catch (err) {
+            next(err)
+        }             
+    } else {
+        const err = new Error('Debes proveer latitud y longitud');
+        err.status = 400;
+        next (err);
+    }
+
+});
+
 server.get('/get_layer/:s/:z/:x/:y.png', async (req, res, next) => {
     const { s, z, x, y } = req.params;
     // const response = await axios.get(`https://${s}.tile.openweathermap.org/map/clouds_new/${z}/${x}/${y}.png?appid=${API_KEY}`);
@@ -63,6 +89,8 @@ server.use((err, _req, res, next) => {
     next();
 });
 
-server.listen(process.env.PORT || 5000, () => {
-    console.log('--- Weather API listening at 5000...')
+const port = process.env.PORT || 5000
+
+server.listen(port, () => {
+    console.log(`--- Weather API listening at ${port}...`)
 });

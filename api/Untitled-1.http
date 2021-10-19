@@ -1,0 +1,1 @@
+GET http://localhost:5000/api/currentlocation?lat=-34.6280805&lon=-58.5199181

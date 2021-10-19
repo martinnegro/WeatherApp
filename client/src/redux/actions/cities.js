@@ -4,14 +4,14 @@ const { v4: uuidv4 } = require('uuid');
 const { REACT_APP_URL_BACKEND } = process.env; 
 
 export const FETCH_CITY  = 'FETCH_CITY';
-export const IS_FETCHING = 'IS_FETCHING';
+export const IS_FETCHING_CITY = 'IS_FETCHING_CITY';
 export const CLOSE_CITY  = 'CLOSE_CITY';
 export const FETCH_ERROR = 'FETCH_ERROR';
 
 export function fetchCity(city) {
     return function (dispatch) {
-        const id = uuidv4();
-        dispatch(isFetching(id));
+        const localID = uuidv4();
+        dispatch(isFetchingCity(localID));
         return axios.get(`${REACT_APP_URL_BACKEND}/api?city=${city}`)
             .then(response => {
                 if(response.data !== undefined){
@@ -31,16 +31,16 @@ export function fetchCity(city) {
                     }
                     dispatch({
                         type: FETCH_CITY,
-                        payload: {city, id}
+                        payload: { city, localID }
                     })
                 }
-            }).catch(err => dispatch({type: FETCH_ERROR, payload: {err, id}}));
+            }).catch(err => dispatch({type: FETCH_ERROR, payload: { err, localID }}));
     }
 }
 
-export function isFetching(payload) {
+export function isFetchingCity(payload) {
     return {
-        type: IS_FETCHING,
+        type: IS_FETCHING_CITY,
         payload
     }
 }

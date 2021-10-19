@@ -1,34 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from './App.module.css';
 import { Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCity, closeCity } from '../redux/actions';
+import { fetchCurrent, setCoord, fetchErrorCurrent } from '../redux/actions/currentlocation';
 
-import Cards from '../components/Cards.jsx';
+import Home from '../views/Home/';
 import Nav from '../components/Nav'
-import About from '../components/About'
-import City from '../components/City'
+import About from '../views/About/'
+import City from '../views/City';
 
 function App() {
-  const cities = useSelector(state => state);
   const dispatch = useDispatch();
-  
-  function onSearch(city) {
-    dispatch(fetchCity(city));
-  }
-  function onClose(cityId) {
-    dispatch(closeCity(cityId))
-  }
+  const { coord } = useSelector(state => state.currentlocation)  
+  useEffect(()=>{
+      if ( 'geolocation' in navigator ) {
+          navigator.geolocation.getCurrentPosition((position) => {
+              dispatch(setCoord(position.coords.latitude, position.coords.longitude))
+          })
+      } else {
+          dispatch(fetchErrorCurrent(true, 'No se puede obtener la ubicación'))
+      }   
+  },[dispatch])
+  useEffect(()=>{
+      if ( coord.lon !== 0 && coord.lat !== 0 ) {
+          dispatch(fetchCurrent(coord.lat,coord.lon))
+      }
+  },[coord])
 
   return (
     <div className={style.App}>
-      <Route path='/' render={() => <Nav onSearch={onSearch}/>}/>
+      <Route path='/' component={Nav}/>
       < div className={style.main}>
         <Route exact path='/'
-          render={() => <Cards 
-            cities={cities}
-            onClose={onClose}  
-          />}
+          component={Home}
         />
         <Route path='/about' component={About}/> 
         <Route 
