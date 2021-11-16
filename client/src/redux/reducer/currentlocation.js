@@ -6,14 +6,15 @@ import {
 } from '../actions/currentlocation'
 
 const initState = {
-    isFetching: false,
+    isFetching: true,
     isError: false,
     coord: {
-        lat: '',
-        lon: ''
+        lat: 0,
+        lon: 0
     },
-    forecast: {},
-    currentInfo: {}
+    name: '',
+    current: {},
+    forecast: {}
 }
 
 export default function currentlocation(state = initState, { type, payload }) {
@@ -33,7 +34,8 @@ export default function currentlocation(state = initState, { type, payload }) {
                 ...state,
                 isError: false,
                 isFetching: false,
-                currentInfo: payload,
+                current: payload.current,
+                forecast: payload.forecast,
                 message: ''
             };
         case IS_FETCHING_CURRENT:

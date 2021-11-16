@@ -12,6 +12,7 @@ import City from '../views/City';
 function App() {
   const dispatch = useDispatch();
   const { coord } = useSelector(state => state.currentlocation)  
+  
   useEffect(()=>{
       if ( 'geolocation' in navigator ) {
           navigator.geolocation.getCurrentPosition((position) => {
@@ -21,16 +22,17 @@ function App() {
           dispatch(fetchErrorCurrent(true, 'No se puede obtener la ubicación'))
       }   
   },[dispatch])
+  
   useEffect(()=>{
       if ( coord.lon !== 0 && coord.lat !== 0 ) {
           dispatch(fetchCurrent(coord.lat,coord.lon))
       }
-  },[coord])
+  },[coord,dispatch])
 
   return (
     <div className={style.App}>
       <Route path='/' component={Nav}/>
-      < div className={style.main}>
+      < div className={style.main}> 
         <Route exact path='/'
           component={Home}
         />

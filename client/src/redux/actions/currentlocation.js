@@ -11,6 +11,7 @@ export const fetchCurrent = (lat, lon) => {
         dispatch(isFetchingCurrent());
         return axios.get(`${REACT_APP_URL_BACKEND}/api/currentlocation?lat=${lat}&lon=${lon}`)
                     .then(response => {
+                        console.log(response.data)
                         dispatch({
                             type: FETCH_CURRENT,
                             payload: response.data

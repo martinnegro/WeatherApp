@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { MapContainer, TileLayer, } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'
 import './MapView.module.css';

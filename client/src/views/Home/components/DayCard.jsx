@@ -1,27 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import getDayName from '../../../utils/getDayName';
 
 const DayCard = ({ day, convertToHours }) => {
     const [ dayName, setDayName ] = useState(null)
-    const [ temp, setTemp ] = useState(null)
+        
     useEffect(()=>{
-        const auxDay = new Date(day.dt * 1000).getDay();
-        auxDay === 0 ? setDayName('Domingo') :
-        auxDay === 1 ? setDayName('Lunes') :
-        auxDay === 2 ? setDayName('Martes') :
-        auxDay === 3 ? setDayName('Miércoles') :
-        auxDay === 4 ? setDayName('Jueves') :
-        auxDay === 5 ? setDayName('Viernes') :
-        setDayName('Sábado');
-
-
+        setDayName(getDayName(day.dt));
     },[day])
-
-    console.log(day)
 
     return (
         <div>
             <p>{dayName}</p>
-            <img src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}/>
+            <img 
+                src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                alt={`Estado del clima el día ${dayName}`}
+            />
             <p>Min {day.temp.min.toFixed(1)}°</p>
             <p>Max {day.temp.max.toFixed(1)}°</p>
         </div>
